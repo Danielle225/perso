@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    fetch(`https://post-it.epi-bluelock.bj/${this.mdf}`)
+    fetch(`https://post-it.epi-bluelock.bj/notes/${this.mdf}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
@@ -64,7 +64,7 @@ export default {
           content: [this.noteContent]
         })
       }
-      await fetch(`https://post-it.epi-bluelock.bj/${this.mdf}`, requestOptions)
+      await fetch(`https://post-it.epi-bluelock.bj/notes/${this.mdf}`, requestOptions)
         .then((response) => response.json())
         .then((data) => (this.postId = data.id))
         .catch((err) => console.log(err.message))

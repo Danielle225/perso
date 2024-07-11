@@ -52,7 +52,7 @@ export default {
     }
   },
  async mounted() {
-   await fetch(`http://62.72.5.95:1999/notes`)
+   await fetch(`https://post-it.epi-bluelock.bj/notes`)
       .then((response) => response.json())
       .then((data) => {this.note=data}) 
         
@@ -69,7 +69,7 @@ export default {
           content: [this.noteContent]
         })
       }
-     await fetch(`http://62.72.5.95:1999/notes`, requestOptions)
+     await fetch(`https://post-it.epi-bluelock.bj/notes`, requestOptions)
         .then((response) => response.json())
         .then((data) => (this.postId = data.id))
     

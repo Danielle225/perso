@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    fetch('https://post-it.epi-bluelock.bj/' + this.ddab)
+    fetch('https://post-it.epi-bluelock.bj/notes/' + this.ddab)
       .then((response) => response.json())
       .then((data) => {
         this.note = data
@@ -65,7 +65,7 @@ export default {
         }
 
         try {
-          const response = await fetch(`https://post-it.epi-bluelock.bj/${supp}`, requestOptions)
+          const response = await fetch(`https://post-it.epi-bluelock.bj/notes/${supp}`, requestOptions)
           const data = await response.json()
           this.postId = data.id
           this.$router.push('/')

@@ -62,7 +62,7 @@ export default {
       }
     },
     fetchNotes() {
-      fetch('http://62.72.5.95:1999/notes')
+      fetch('https://post-it.epi-bluelock.bj/notes')
         .then((response) => response.json())
         .then((data) => {
           this.notes = data.notes;
