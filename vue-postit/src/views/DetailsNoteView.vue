@@ -33,6 +33,7 @@
   </body>
 </template>
 <script>
+import Swal from 'sweetalert2'
 export default {
   data() {
     return {
@@ -57,22 +58,41 @@ export default {
   },
   methods: {
     async DeleteNote(supp) {
-      const doDelete = confirm('Êtes-vous sûr de vouloir supprimer cette note?')
-      if (doDelete) {
-        const requestOptions = {
-          method: 'Delete',
-          headers: { 'Content-Type': 'application/json' }
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const requestOptions = {
+            method: 'Delete',
+            headers: { 'Content-Type': 'application/json' }
+          }
+      
+          try {
+            const response = await fetch(
+              `https://post-it.epi-bluelock.bj/notes/${supp}`,
+              requestOptions
+            )
+            const data = await response.json()
+            this.postId = data.id
+            this.$router.push('/')
+          } catch (error) {
+            console.error(error.message)
+          }
+          Swal.fire({
+            title: 'Deleted!',
+            text: 'Your file has been deleted.',
+            icon: 'success'
+          })
         }
-
-        try {
-          const response = await fetch(`https://post-it.epi-bluelock.bj/notes/${supp}`, requestOptions)
-          const data = await response.json()
-          this.postId = data.id
-          this.$router.push('/')
-        } catch (error) {
-          console.error(error.message)
-        }
-      }
+      })
+    
+      
     }
   }
 }
